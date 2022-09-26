@@ -5,10 +5,18 @@ Foram utilizadas as tecnologias:
 - Docker para containerização
 - Airflow para orquestração das tarefas
 
+As respostas das perguntas se encontram no arquivo *Respostas Desafio Mesha.docx*
+
 ## Modelagem:
 
 - Modelagem dimensional no esquema estrela:
 ![Imagem da modelagem](https://i.imgur.com/HegZcFc.png)
+
+    - **fato_enem:** Tabela com os dados de nota, presença, todas as FKs e indicadores
+    - **dim_escola:** Tabela com o descritivo de todas as combinações das categorias de escola e uma SK
+    - **dim_presenca:** Se liga com as colunas de presenca da fato, usada para colocar a descrição da presença
+    - **dim_status_redacao:** Parecida com a dim_presenca, mas para a redação
+    - **dim_cor_raca**: Descritivo da etnia do candidato
 
 ## Configuração do Ambiente (Linux)
 
