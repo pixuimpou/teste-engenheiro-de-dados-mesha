@@ -1,0 +1,22 @@
+version: "3.9"
+services:
+  db:
+    image: "mcr.microsoft.com/mssql/server"
+    container_name: "mssql_db_desafio"
+    environment:
+      SA_PASSWORD: "Your_password123"
+      ACCEPT_EULA: "Y"
+    ports:
+      - 1433:1433
+    volumes:
+      - "${DESAFIO_MESHA_HOME}/mount/sqlserver:/var/opt/mssql/data"
+  pyspark:
+    image: "pixuimpou/spark-py-mssql"
+    container_name: "pyspark_desafio"
+    environment:
+       DESAFIO_MESHA_SQL_USER: ${DESAFIO_MESHA_SQL_USER}
+       DESAFIO_MESHA_SQL_PASS: ${DESAFIO_MESHA_SQL_PASS}
+    volumes:
+      - "${DESAFIO_MESHA_HOME}/mount/pyspark:/opt/spark/work-dir"
+    tty: true
+    
