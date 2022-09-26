@@ -52,9 +52,11 @@ Coloque os arquivos *Dicionário_Microdados_Enem_2020.xlsx* e *MICRODADOS_ENEM_2
 **1. Dentro da pasta docker execute o comando:**
     `docker compose -f docker-compose-ambiente.yml -f docker-compose-airflow.yaml up`
 
-**2. Acesse a url:** `http://localhost:8080`
+**2. Execute, no banco de dados que foi criado com o comando anterior, o script db_enem.sql que se encontra dentro da pasta DB**
 
-**3. Na interface do Airflow, busque a dag "dag_desafio_mesha" e a execute**
+**3. Acesse a url:** `http://localhost:8080`
 
-**4. Após a execução terminar, o banco de dados já estará carregado**
+**4. Na interface do Airflow, busque a dag "dag_desafio_mesha" e a execute**
+
+**5. Após a execução terminar, o banco de dados já estará carregado**
    
