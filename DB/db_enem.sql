@@ -24,6 +24,10 @@ CREATE TABLE dim_presenca (
 	Descricao_Presenca VARCHAR(18)
 )
 
+CREATE TABLE dim_status_redacao(
+	ID_Status_Redacao TINYINT,
+	Status_Redacao VARCHAR(31)
+)
 
 CREATE TABLE fato_enem(
 	Numero_Inscricao CHAR(12),
@@ -41,6 +45,7 @@ CREATE TABLE fato_enem(
 	Presenca_Linguagens TINYINT,
 	Presenca_Matematica TINYINT,
 	Flag_Falta BIT,
+	ID_Status_Redacao TINYINT,
 	Nota_Media FLOAT
 )
 
