@@ -1,36 +1,52 @@
 # Teste de Eng. de Dados
-Critérios avaliadas:
-- Docker;
-- SQL;
-- Python;
-- Organização do Código
-- Documentação
-- ETL
-- Modelagem dos dados
 
-### Desejáveis
-- PySpark
-- Esquema Estrela
+Foram utilizadas as tecnologias: 
+- Spark (com PySpark) para fazer o tratamento dos dados
+- Docker para containerização
+- Airflow para orquestração das tarefas
 
+## Modelagem:
 
-### Steps:
+- Modelagem dimensional no esquema estrela:
+![Imagem da modelagem](https://i.imgur.com/HegZcFc.png)
 
-1. Realizar um Fork desse projeto
-2. Realizar a modelagem dimensional da base
-    - A base está disponível para download [clicando aqui](https://download.inep.gov.br/microdados/microdados_enem_2020.zip).
-    - Após descompactar a paste, o Arquivo com a base encontra-se no diretório microdados_enem_2020/DADOS/MICRODADOS_ENEM_2020.csv
-    - A documentação necessária sobre os campos da base está disponível nos demais diretórios dentro da pasta descompactada.
-3. Realizar o ETL dessa base em Python para o MySQL no container
-4. Disponibilizar o link do seu repositório para posterior avaliação
+## Configuração do Ambiente (Linux)
 
+**1. Imagens Docker**<br/><br/>
 
-### Levantar Indicadores
-#### Responder às seguintes perguntas:
-1. Qual a escola com a maior média de notas?
-2. Qual o aluno com a maior média de notas e o valor dessa média?
-3. Qual a média geral?
-4. Qual o % de Ausentes?
-5. Qual o número total de Inscritos?
-6. Qual a média por disciplina?
-7. Qual a média por Sexo?
-8. Qual a média por Etnia?
+Foram usadas 2 imagens docker personalizadas para fazer a conexão com o banco de dados:
+
+```
+docker pull pixuimpou/airflow:2.4.0-mssql
+docker pull pixuimpou/spark-py-mssql
+```
+**2. Variáveis de Ambiente**<br/><br/>
+
+Defina as variáveis de ambiente:
+
+- DESAFIO_MESHA_HOME
+    - Deve ser a pasta raiz do repositorio
+    - Exemplo: /home/rafael/desafio_mesha
+- DESAFIO_MESHA_SQL_USER
+    - Nome do usuário do banco de dados
+- DESAFIO_MESHA_SQL_PASS
+    - Senha do banco de dados
+- AIRFLOW_UID
+    - Seu id de usuario
+    - AIRFLOW_UID=$(id -u)
+
+**3. Dados**<br/><br/>
+
+Coloque os arquivos *Dicionário_Microdados_Enem_2020.xlsx* e *MICRODADOS_ENEM_2020.csv* na diretorio `./mount/pyspark/data/raw`
+
+## Iniciando o projeto
+
+**1. Dentro da pasta docker execute o comando:**
+    `docker compose -f docker-compose-ambiente.yml -f docker-compose-airflow.yaml up`
+
+**2. Acesse a url:** `http://localhost:8080`
+
+**3. Na interface do Airflow, busque a dag "dag_desafio_mesha" e a execute**
+
+**4. Após a execução terminar, o banco de dados já estará carregado**
+   
